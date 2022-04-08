@@ -3,7 +3,7 @@ import org.gradle.api.Project.DEFAULT_VERSION
 plugins {
     kotlin("jvm") version "1.4.20"
     kotlin("kapt") version "1.4.20"
-    id("io.johnsonlee.sonatype-publish-plugin") version "1.3.0"
+    id("io.johnsonlee.sonatype-publish-plugin") version "1.5.6"
 }
 
 group = "io.johnsonlee"
@@ -14,7 +14,6 @@ repositories {
     mavenLocal()
     mavenCentral()
     google()
-    jcenter()
 }
 
 dependencies {
