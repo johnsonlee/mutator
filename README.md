@@ -22,7 +22,7 @@ data class Nation(
 )
 ```
 
-If we want to modify the `Persion.address.nation.code`, we have to write code like this:
+If we want to modify the `Person.address.nation.code`, we have to write code like this:
 
 ```kotlin
 val person = Person(...)
@@ -49,7 +49,7 @@ val clone = person.copy(
 1. Call the extension function `mutate(...)`
 
     ```kotlin
-    val clone = person.mutate(Persion::address, Address::nation, Nation::code, "New Code")
+    val clone = person.mutate(Person::address, Address::nation, Nation::code, "New Code")
     ```
    
     The code above is equivalent to the following
