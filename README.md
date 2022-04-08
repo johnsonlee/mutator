@@ -42,7 +42,7 @@ val clone = person.copy(
 
     ```kotlin
     dependencies {
-        implementation("io.johnsonlee:mutator:1.0.0")
+        implementation("io.johnsonlee:mutator:1.1.0")
     }
     ```
 
