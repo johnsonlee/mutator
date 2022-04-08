@@ -11,11 +11,12 @@ import kotlin.reflect.full.valueParameters
  * Mutates the specified property [p1] with provided [value]
  *
  * @receiver the type to mutate
- * @param p1 the property to mutate
+ * @param p1 the property of [T] to mutate
  * @param value the value to assign
  * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
  */
-inline fun <reified T : Immutable, V> T.mutate(
+inline fun <reified T : Any, V> T.mutate(
         p1: KProperty1<T, V>,
         value: T.() -> V
 ): T {
@@ -39,7 +40,17 @@ inline fun <reified T : Immutable, V> T.mutate(
     return copy.callBy(arg0 + args)
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, V>,
         value: A.() -> V
@@ -49,7 +60,18 @@ inline fun <reified T : Immutable, reified A : Immutable, V> T.mutate(
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, V>,
@@ -62,7 +84,19 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
@@ -78,7 +112,20 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, reified D : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4]::[p5] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param p5 the property of [p4] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
@@ -97,7 +144,21 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, reified D : Immutable, reified E : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4]::[p5]::[p6] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param p5 the property of [p4] to mutate
+ * @param p6 the property of [p5] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
@@ -119,7 +180,22 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, reified D : Immutable, reified E : Immutable, reified F : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4]::[p5]::[p6]::[p7] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param p5 the property of [p4] to mutate
+ * @param p6 the property of [p5] to mutate
+ * @param p7 the property of [p6] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
@@ -144,7 +220,23 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, reified D : Immutable, reified E : Immutable, reified F : Immutable, reified G : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4]::[p5]::[p6]::[p7]::[p8] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param p5 the property of [p4] to mutate
+ * @param p6 the property of [p5] to mutate
+ * @param p7 the property of [p6] to mutate
+ * @param p8 the property of [p7] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, reified G : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
@@ -172,7 +264,24 @@ inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable,
     }
 }
 
-inline fun <reified T : Immutable, reified A : Immutable, reified B : Immutable, reified C : Immutable, reified D : Immutable, reified E : Immutable, reified F : Immutable, reified G : Immutable, reified H : Immutable, V> T.mutate(
+/**
+ * Mutates the specified property [p1]::[p2]::[p3]::[p4]::[p5]::[p6]::[p7]::[p8]::[p9] with provided [value]
+ *
+ * @receiver the type to mutate
+ * @param p1 the property of [T] to mutate
+ * @param p2 the property of [p1] to mutate
+ * @param p3 the property of [p2] to mutate
+ * @param p4 the property of [p3] to mutate
+ * @param p5 the property of [p4] to mutate
+ * @param p6 the property of [p5] to mutate
+ * @param p7 the property of [p6] to mutate
+ * @param p8 the property of [p7] to mutate
+ * @param p9 the property of [p8] to mutate
+ * @param value the value to assign
+ * @return the mutated instance
+ * @throws [IllegalArgumentException] if [T] is not a data class
+ */
+inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, reified G : Any, reified H : Any, V> T.mutate(
         p1: KProperty1<T, A>,
         p2: KProperty1<A, B>,
         p3: KProperty1<B, C>,
