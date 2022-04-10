@@ -17,8 +17,8 @@ import kotlin.reflect.full.valueParameters
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, V> T.mutate(
-        p1: KProperty1<T, V>,
-        value: T.() -> V
+        p1: KProperty1<T, V?>,
+        value: T.() -> V?
 ): T {
     require(T::class.isData) {
         "${T::class.qualifiedName} is not a data class!"
@@ -51,11 +51,11 @@ inline fun <reified T : Any, V> T.mutate(
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, V>,
-        value: A.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, V?>,
+        value: A.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
+    p1.get(this)?.mutate(p2) {
         value.invoke(this)
     }
 }
@@ -72,13 +72,13 @@ inline fun <reified T : Any, reified A : Any, V> T.mutate(
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, V>,
-        value: B.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, V?>,
+        value: B.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
             value.invoke(this)
         }
     }
@@ -97,15 +97,15 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, V> T.mutate(
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, V>,
-        value: C.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, V?>,
+        value: C.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
                 value.invoke(this)
             }
         }
@@ -126,17 +126,17 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, 
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, D>,
-        p5: KProperty1<D, V>,
-        value: D.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, D?>,
+        p5: KProperty1<D, V?>,
+        value: D.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
-                p4.get(this).mutate(p5) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
+                p4.get(this)?.mutate(p5) {
                     value.invoke(this)
                 }
             }
@@ -159,19 +159,19 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, 
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, D>,
-        p5: KProperty1<D, E>,
-        p6: KProperty1<E, V>,
-        value: E.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, D?>,
+        p5: KProperty1<D, E?>,
+        p6: KProperty1<E, V?>,
+        value: E.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
-                p4.get(this).mutate(p5) {
-                    p5.get(this).mutate(p6) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
+                p4.get(this)?.mutate(p5) {
+                    p5.get(this)?.mutate(p6) {
                         value.invoke(this)
                     }
                 }
@@ -196,21 +196,21 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, 
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, D>,
-        p5: KProperty1<D, E>,
-        p6: KProperty1<E, F>,
-        p7: KProperty1<F, V>,
-        value: F.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, D?>,
+        p5: KProperty1<D, E?>,
+        p6: KProperty1<E, F?>,
+        p7: KProperty1<F, V?>,
+        value: F.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
-                p4.get(this).mutate(p5) {
-                    p5.get(this).mutate(p6) {
-                        p6.get(this).mutate(p7) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
+                p4.get(this)?.mutate(p5) {
+                    p5.get(this)?.mutate(p6) {
+                        p6.get(this)?.mutate(p7) {
                             value.invoke(this)
                         }
                     }
@@ -237,23 +237,23 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, 
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, reified G : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, D>,
-        p5: KProperty1<D, E>,
-        p6: KProperty1<E, F>,
-        p7: KProperty1<F, G>,
-        p8: KProperty1<G, V>,
-        value: G.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, D?>,
+        p5: KProperty1<D, E?>,
+        p6: KProperty1<E, F?>,
+        p7: KProperty1<F, G?>,
+        p8: KProperty1<G, V?>,
+        value: G.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
-                p4.get(this).mutate(p5) {
-                    p5.get(this).mutate(p6) {
-                        p6.get(this).mutate(p7) {
-                            p7.get(this).mutate(p8) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
+                p4.get(this)?.mutate(p5) {
+                    p5.get(this)?.mutate(p6) {
+                        p6.get(this)?.mutate(p7) {
+                            p7.get(this)?.mutate(p8) {
                                 value.invoke(this)
                             }
                         }
@@ -282,25 +282,25 @@ inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, 
  * @throws [IllegalArgumentException] if [T] is not a data class
  */
 inline fun <reified T : Any, reified A : Any, reified B : Any, reified C : Any, reified D : Any, reified E : Any, reified F : Any, reified G : Any, reified H : Any, V> T.mutate(
-        p1: KProperty1<T, A>,
-        p2: KProperty1<A, B>,
-        p3: KProperty1<B, C>,
-        p4: KProperty1<C, D>,
-        p5: KProperty1<D, E>,
-        p6: KProperty1<E, F>,
-        p7: KProperty1<F, G>,
-        p8: KProperty1<G, H>,
-        p9: KProperty1<H, V>,
-        value: H.() -> V
+        p1: KProperty1<T, A?>,
+        p2: KProperty1<A, B?>,
+        p3: KProperty1<B, C?>,
+        p4: KProperty1<C, D?>,
+        p5: KProperty1<D, E?>,
+        p6: KProperty1<E, F?>,
+        p7: KProperty1<F, G?>,
+        p8: KProperty1<G, H?>,
+        p9: KProperty1<H, V?>,
+        value: H.() -> V?
 ): T = this.mutate(p1) {
-    p1.get(this).mutate(p2) {
-        p2.get(this).mutate(p3) {
-            p3.get(this).mutate(p4) {
-                p4.get(this).mutate(p5) {
-                    p5.get(this).mutate(p6) {
-                        p6.get(this).mutate(p7) {
-                            p7.get(this).mutate(p8) {
-                                p8.get(this).mutate(p9) {
+    p1.get(this)?.mutate(p2) {
+        p2.get(this)?.mutate(p3) {
+            p3.get(this)?.mutate(p4) {
+                p4.get(this)?.mutate(p5) {
+                    p5.get(this)?.mutate(p6) {
+                        p6.get(this)?.mutate(p7) {
+                            p7.get(this)?.mutate(p8) {
+                                p8.get(this)?.mutate(p9) {
                                     value.invoke(this)
                                 }
                             }
